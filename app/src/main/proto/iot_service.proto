@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.iotservice";
+option java_outer_classname = "IoTServiceProto";
+option objc_class_prefix = "TEMP";
+
+package iot_service;
+
+service IoTService {
+  
+  // Connects a device to the service
+  rpc ConnectDevice (ConnectRequest) returns (ConnectReply) {}
+  
+  // Calls an attribute over the environment
+  rpc CallAttribute (AttributeRequest) returns (AttributeReply) {}
+}
+
+message ConnectRequest {
+  string device = 1;
+  repeated string attributes = 2;
+}
+
+message ConnectReply {
+}
+
+message AttributeRequest {
+  uint32 session = 1;
+  string environment = 2;
+  string attribute = 3;
+  string parameter = 4;
+}
+
+message AttributeReply {
+  string value = 1;
+}
